@@ -1,6 +1,4 @@
 library(shiny)
-
-#raw code copied from r file. Mostly putting this here to try committing document from R to Github. 
 library(plot3D)
 library(tidyverse)
 library(ggplot2)
@@ -71,14 +69,15 @@ ui <- fluidPage(
   # Application title
   titlePanel("Multicollinearity Visualization App"),
   
-  # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
+      #User chooses which matrix to work with using this slider.
       sliderInput("mcSet",
                   "Multicollinearity Factor: Higher numbers for more multicollinearity:",
                   min = 1,
                   max = nSets,
                   value = 1),
+      #user chooses display angles
       sliderInput("userPhi",
                    "Vertical Display Angle:",
                    min = 0,
@@ -93,7 +92,7 @@ ui <- fluidPage(
                   value = 20)
     ),
     
-    # Show a plot of the generated distribution
+    # Show graph and brief explanation. 
     mainPanel(
       plotOutput("ssePlot"),
       textOutput("explanation")
@@ -101,11 +100,12 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic required to draw a histogram
+#app logic
+
 server <- function(input, output) {
   
   output$ssePlot <- renderPlot({
-    # generate bins based on input$bins from ui.R
+    # output is this fancy 3d graph. Inputs flexible for data matrix and viewing angles.
     persp3D(beta1,beta2,sse_array[,,input$mcSet],
             phi = input$userPhi,
             theta = input$userTheta,
