@@ -118,7 +118,7 @@ server <- function(input, output) {
             ticktype = "simple",
             resfac = 3,
             contour = TRUE,
-            main = "Sum of Squared Errors (-) for Bivariate Regression",
+            main = "Sum of Squared Errors (-) for Multiple Regression with Two Inputs",
             las = 0,
             cex.lab = 1.5,
             cex.main = 2,
